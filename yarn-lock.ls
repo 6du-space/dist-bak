@@ -105,7 +105,7 @@ do !~>
         file
       )
     await fs.outputFile(
-      path-v+base64url(v)
+      path-v+base64.encode(v)
       sign
     )
     await fs.outputFile(
