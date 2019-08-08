@@ -18,6 +18,9 @@ ROOT = dirname(PWD)
 
 
 # version = update_version()
+cd @(ROOT)/v
+git pull
+
 cd @(ROOT)/sh
 yarn
 
