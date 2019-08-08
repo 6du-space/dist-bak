@@ -2,7 +2,6 @@
 
 require! <[
   crypto
-  base64url
   path
   os
   @yarnpkg/lockfile
@@ -10,6 +9,7 @@ require! <[
   ./file-li
 ]>
 require! {
+  \urlsafe-base64 : base64
   \fs-extra : fs
   \sodium-6du : sodium
 }
@@ -82,7 +82,7 @@ do !~>
   path-v = _path \v/6du/v
   v = await version path-v
   try
-    hash =  await sodium.hash-path(path-v+base64url(v))
+    hash =  await sodium.hash-path(path-v+base64.encode(v))
   catch err
     if err.errno != -2
       throw err
@@ -93,7 +93,7 @@ do !~>
     console.log '更新版本' , v
     v = int2bin(v)
     for [hash, file] in file-hash-li
-      hash = base64url(hash)
+      hash = base64.encode(hash)
       n = [
         \v/_
       ]
