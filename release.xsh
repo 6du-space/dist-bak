@@ -1,4 +1,5 @@
 #!/usr/bin/env xonsh
+$XONSH_SHOW_TRACEBACK = True
 
 from os.path import abspath,dirname,join, exists
 from json import loads,dumps
@@ -24,7 +25,7 @@ git pull
 cd @(ROOT)/sh
 yarn
 
-cd @(ROOT)
+cd @(PWD)
 ./yarn-lock.ls
 
 cd @(ROOT)/v
