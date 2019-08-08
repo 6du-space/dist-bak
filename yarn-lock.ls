@@ -93,8 +93,15 @@ do !~>
     console.log '更新版本' , v
     v = int2bin(v)
     for [hash, file] in file-hash-li
+      hash = base64url(hash)
+      n = [
+        \v/_
+      ]
+      for i from 0 til 6
+        n.push hash[i]
+      n.push hash.slice(6)
       await fs.outputFile(
-        _path(\v/_/ + base64url(hash))
+        _path n.join('/')
         file
       )
     await fs.outputFile(
