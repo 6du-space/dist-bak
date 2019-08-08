@@ -26,6 +26,8 @@ cd @(ROOT)/sh
 yarn
 
 cd @(PWD)
+if not exists(join(PWD, 'node_modules')):
+  yarn
 ./yarn-lock.ls
 
 cd @(ROOT)/v
@@ -44,8 +46,5 @@ git push origin master
 # cd @(tmp)
 # yarn
 
-#cd @(PWD)
-# if not exists(join(PWD, 'node_modules')):
-#   yarn
 # ./cloudflare-6du.ls
 
