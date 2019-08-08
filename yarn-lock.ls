@@ -50,7 +50,7 @@ yarn-lock-pack = (sk, yarn-lock-path)~>
   for i in li
     hash = await sodium.hash-path(path.join(down.root,i))
     file-hash-li.push [i.slice(0,-4), hash]
-  return file-li.pack(sk, file-hash-li)
+  return file-li.pack(sk, [file-hash-li])
 
 _path = (p)->
   path.resolve(__dirname,"..",p)
@@ -87,14 +87,19 @@ do !~>
     if err.errno != -2
       throw err
 
-  bin = await yarn-lock-pack(sk, _path \sh)
-  if sodium.hash(bin).compare(hash or Buffer.alloc(0))
+  [sign, file-hash-li] = await yarn-lock-pack(sk, _path \sh)
+  if sodium.hash(sign).compare(hash or Buffer.alloc(0))
     v = version-next(v)
     console.log '更新版本' , v
     v = int2bin(v)
+    for [hash, file] in file-hash-li
+      await fs.outputFile(
+        _path(\v/_/ + base64url(hash))
+        file
+      )
     await fs.outputFile(
       path-v+base64url(v)
-      bin
+      sign
     )
     await fs.outputFile(
       path-v
