@@ -5,7 +5,6 @@ require! <[
 
 require! {
   \sodium-6du : sodium
-  \config-6du/6du : config
   \fs-extra : fs
 }
 

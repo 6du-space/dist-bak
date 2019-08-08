@@ -39,6 +39,11 @@
   resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-12.7.1.tgz#3b5c3a26393c19b400844ac422bd0f631a94d69d"
   integrity sha1-O1w6Jjk8GbQAhErEIr0PYxqU1p0=
 
+"@yarnpkg/lockfile@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/@yarnpkg/lockfile/download/@yarnpkg/lockfile-1.1.0.tgz#e77a97fbd345b76d83245edcd17d393b1b41fb31"
+  integrity sha1-53qX+9NFt22DJF7c0X05OxtB+zE=
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/abbrev/download/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -203,6 +208,11 @@ buffer-from@^1.0.0:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/buffer-from/download/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
   integrity sha1-MnE7wCj3XAL9txDXx7zsHyxgcO8=
+
+buffertrim@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/buffertrim/download/buffertrim-1.0.0.tgz#db50a1018958c1ff15063047f8c9ee0759519c1f"
+  integrity sha1-21ChAYlYwf8VBjBH+MnuB1lRnB8=
 
 cache-base@^1.0.1:
   version "1.0.1"

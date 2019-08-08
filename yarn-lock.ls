@@ -56,34 +56,47 @@ _path = (p)->
   path.resolve(__dirname,"..",p)
 
 int2bin = (n)!~>
-  n = Buffer.allocUnsafe(6)
-  n.writeUIntLE(v,0,6)
-  return trimEnd n
+  b = Buffer.allocUnsafe(6)
+  b.writeUIntLE(n,0,6)
+  return trimEnd b
+
+bin2int = (b)!~>
+  t = Buffer.alloc(6)
+  b.copy(t)
+  return t.readUIntLE(0,6)
+
+version-next = (n)~>
+  n = bin2int(n)
+  day = parseInt(new Date()/(86400000)) - 18116
+  if n < day
+    return day
+  return n+1
 
 version = (path-v)!~>
   if await fs.exists path-v
-    # n = Buffer.alloc(6)
-    # ().copy n
     return await fs.readFile path-v
-  else
-    v = parseInt(new Date()/(86400000)) - 18115
-    v = int2bin(v)
-    fs.outputFile(path-v, v)
-    return v
+  return Buffer.alloc(0)
 
 do !~>
   sk = await fs.readFile _path \private/key/6du.sk
-  bin = await yarn-lock-pack(sk, _path \sh)
-  path-v = _path \dns/v/6du/v
+  path-v = _path \v/6du/v
   v = await version path-v
-
   try
     hash =  await sodium.hash-path(path-v+base64url(v))
   catch err
     if err.errno != -2
       throw err
 
-  console.log hash
-
-  # dns-path = path.join(__dirname../dns/v/6du/)
-  # console.log bin
+  bin = await yarn-lock-pack(sk, _path \sh)
+  if sodium.hash(bin).compare(hash or Buffer.alloc(0))
+    v = version-next(v)
+    console.log '更新版本' , v
+    v = int2bin(v)
+    await fs.outputFile(
+      path-v+base64url(v)
+      bin
+    )
+    await fs.outputFile(
+      path-v
+      v
+    )

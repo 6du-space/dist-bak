@@ -6,7 +6,9 @@
   "author": "- <->",
   "license": "MIT",
   "dependencies": {
+    "@yarnpkg/lockfile": "^1.1.0",
     "base64url": "^3.0.1",
+    "buffertrim": "^1.0.0",
     "fs-extra": "^8.1.0",
     "livescript-system": "^1.0.1",
     "livescript-transform-implicit-async": "^1.1.0",
